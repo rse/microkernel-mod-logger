@@ -20,13 +20,20 @@
     "dependencies": {
         "winston":                  "~2.2.0"
     },
+    "devDependencies": {
+        "babel-cli":                "~6.14.0",
+        "babel":                    "~6.5.2",
+        "babel-preset-es2015":      "~6.14.0",
+        "babel-eslint":             "~6.1.2",
+        "eslint":                   "~3.6.0"
+    },
     "peerDependencies": {
         "microkernel":              "*",
         "microkernel-mod-ctx":      "*",
         "microkernel-mod-options":  "*"
     },
     "scripts": {
-        "prepublish": "jshint microkernel-mod-logger.js && babel --presets es2015 microkernel-mod-logger.js >microkernel-mod-logger.js5"
+        "prepublish": "eslint --config eslint.json microkernel-mod-logger.js && babel --presets es2015 microkernel-mod-logger.js >microkernel-mod-logger.js5"
     },
     "main": "microkernel-mod-logger.js5"
 }
