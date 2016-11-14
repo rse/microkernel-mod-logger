@@ -99,7 +99,7 @@ export default class Module {
             level:            "debug",
             filename:         kernel.rs("options:options").logfile,
             handleExceptions: false,
-            maxsize:          1024 * 1024,
+            maxsize:          1024 * 1024 * 1024,
             json:             false,
             timestamp:        true,
             colorize:         false
