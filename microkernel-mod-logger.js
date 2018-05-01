@@ -118,10 +118,8 @@ class Module {
         /*  provide cluster-aware and category-aware logging method  */
         kernel.register("log", (category, level, msg, ...params) => {
             let levelNum = config.levels[level]
-            let levelMax = (
-                config.categories[category] !== undefined ?
-                config.categories[category] : config.categories.any
-            )
+            let levelMax = (config.categories[category] !== undefined ?
+                config.categories[category] : config.categories.any)
             if (levelNum <= levelMax) {
                 msg = category + ": " + msg
                 msg = kernel.hook("logger:msg", "pass", msg)
