@@ -1,6 +1,6 @@
 /*
 **  Microkernel -- Microkernel for Server Applications
-**  Copyright (c) 2016-2017 Ralf S. Engelschall <rse@engelschall.com>
+**  Copyright (c) 2016-2018 Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining
 **  a copy of this software and associated documentation files (the
@@ -22,11 +22,12 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Promise from "bluebird"
-import path    from "path"
-import Winston from "winston"
+/*  external requirements  */
+const path    from "path"
+const Winston from "winston"
 
-export default class Module {
+/*  the Microkernel module  */
+class Module {
     get module () {
         return {
             name:  "microkernel-mod-logger",
@@ -84,7 +85,7 @@ export default class Module {
                 level    = m[2]
             }
             if (config.levels[level] === undefined)
-                throw new Error("invalid logging level \"" + level + "\"")
+                throw new Error(`invalid logging level "${level}"`)
             config.categories[category] = config.levels[level]
         })
 
@@ -131,3 +132,7 @@ export default class Module {
         return Promise.resolve()
     }
 }
+
+/*  export the Microkernel module  */
+module.exports = Module
+
