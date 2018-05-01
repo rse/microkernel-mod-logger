@@ -23,8 +23,8 @@
 */
 
 /*  external requirements  */
-const path    from "path"
-const Winston from "winston"
+const path    = require("path")
+const Winston = require("winston")
 
 /*  the Microkernel module  */
 class Module {
