@@ -18,11 +18,11 @@
     "homepage": "https://github.com/rse/microkernel-mod-logger",
     "bugs":     "https://github.com/rse/microkernel-mod-logger/issues",
     "dependencies": {
-        "winston":                  "2.4.2"
+        "winston":                  "3.0.0"
     },
     "devDependencies": {
-        "babel-eslint":             "8.2.3",
-        "eslint":                   "4.19.1",
+        "babel-eslint":             "8.2.5",
+        "eslint":                   "5.0.0",
         "eslint-config-standard":   "11.0.0",
         "eslint-plugin-standard":   "3.1.0",
         "eslint-plugin-promise":    "3.8.0",

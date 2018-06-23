@@ -89,10 +89,16 @@ class Module {
             config.categories[category] = config.levels[level]
         })
 
+        /*  create formatter instance  */
+        let formatter = Winston.format.combine(
+            Winston.format.timestamp(),
+            Winston.format.printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`)
+        )
+
         /*  create logger instance  */
-        let logger = new Winston.Logger({
+        let logger = Winston.createLogger({
             levels: config.levels,
-            colors: config.colors
+            format: formatter
         })
 
         /*  mandatory: add file logger transport  */
@@ -100,18 +106,17 @@ class Module {
             level:            "debug",
             filename:         kernel.rs("options:options").logfile,
             handleExceptions: false,
-            maxsize:          1024 * 1024 * 1024,
-            json:             false,
-            timestamp:        true,
-            colorize:         false
+            maxsize:          1024 * 1024 * 1024
         }), null, true)
 
         /*  optional: add console logger transport  */
         if (kernel.rs("options:options").console) {
             logger.add(new Winston.transports.Console({
-                level:     "debug",
-                timestamp: true,
-                colorize:  true
+                level: "debug",
+                format: Winston.format.combine(
+                    Winston.format.colorize({ colors: config.colors }),
+                    formatter
+                )
             }), null, true)
         }
 
