@@ -1,6 +1,6 @@
 {
     "name":        "microkernel-mod-logger",
-    "version":     "0.9.15",
+    "version":     "0.9.16",
     "description": "Microkernel module for adding logging capability to a server application",
     "keywords": [
         "microkernel", "module", "logger"
