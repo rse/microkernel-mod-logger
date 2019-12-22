@@ -37,22 +37,25 @@ class Module {
         }
     }
     latch (kernel) {
-        let logfile = path.join(kernel.rs("ctx:basedir"), kernel.rs("ctx:program") + ".log")
+        const logfile = path.join(kernel.rs("ctx:basedir"), kernel.rs("ctx:program") + ".log")
         kernel.latch("options:options", (options) => {
             options.push({
                 name: "console", type: "bool", "default": false,
-                help: "Display logfile also on console." })
+                help: "Display logfile also on console."
+            })
             options.push({
                 names: [ "logfile", "l" ], type: "string", "default": logfile,
-                help: "Path to logfile", helpArg: "PATH" })
+                help: "Path to logfile", helpArg: "PATH"
+            })
             options.push({
                 names: [ "loglevel", "L" ], type: "string", "default": "warning",
-                help: "Logging (category and) level", helpArg: "[CATEGORY:]LEVEL,..." })
+                help: "Logging (category and) level", helpArg: "[CATEGORY:]LEVEL,..."
+            })
         })
     }
     configure (kernel) {
         /*  configure the logging levels and colors  */
-        let config = {
+        const config = {
             categories: {
                 any:     2
             },
@@ -90,13 +93,13 @@ class Module {
         })
 
         /*  create formatter instance  */
-        let formatter = Winston.format.combine(
+        const formatter = Winston.format.combine(
             Winston.format.timestamp(),
             Winston.format.printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`)
         )
 
         /*  create logger instance  */
-        let logger = Winston.createLogger({
+        const logger = Winston.createLogger({
             levels: config.levels,
             format: formatter
         })
@@ -122,8 +125,8 @@ class Module {
 
         /*  provide cluster-aware and category-aware logging method  */
         kernel.register("log", (category, level, msg, ...params) => {
-            let levelNum = config.levels[level]
-            let levelMax = (config.categories[category] !== undefined ?
+            const levelNum = config.levels[level]
+            const levelMax = (config.categories[category] !== undefined ?
                 config.categories[category] : config.categories.any)
             if (levelNum <= levelMax) {
                 msg = category + ": " + msg
